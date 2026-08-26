@@ -193,10 +193,10 @@ class CramLoraAdapterWeights(nn.Module):
 
 @dataclass
 class CramBudgetLoraConfig(LoraConfig):
-    cram_rank_total: int = field(default=80)
+    cram_rank_total: int = field(default=48)
     cram_expert_rank_max: int = field(default=9)
-    cram_max_expert_slots: int = field(default=32)
-    expert_num: int = field(default=32)
+    cram_max_expert_slots: int = field(default=10)
+    expert_num: int = field(default=10)
     cur_task: int = field(default=0)
 
     def __post_init__(self):
@@ -319,9 +319,9 @@ class CramBudgetLoraLinear(nn.Linear, CramBudgetLoraLayer):
         layer_id: int = 0,
         fan_in_fan_out: bool = False,
         init_lora_weights: bool = True,
-        cram_rank_total: int = 80,
+        cram_rank_total: int = 48,
         cram_expert_rank_max: int = 9,
-        cram_max_expert_slots: int = 32,
+        cram_max_expert_slots: int = 10,
         **kwargs,
     ):
         self.is_target_conv_1d_layer = bool(kwargs.pop("is_target_conv_1d_layer", False))
