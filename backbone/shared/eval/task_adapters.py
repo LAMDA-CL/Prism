@@ -107,6 +107,14 @@ class DefaultTaskAdapter(BaseInferenceAdapter):
                 prompt, context.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt")
             input_ids_list.append(input_id)
 
+        # LLaVA `prepare_inputs_labels_for_multimodal` treats left-pad tokens as real
+        # tokens. pad_token often equals eos, so batched ArxivQA (high length variance)
+        # collapses to "." / "Ъ". Generate independently when lengths differ.
+        if len(samples) > 1:
+            lengths = [int(ids.numel()) for ids in input_ids_list]
+            if max(lengths) != min(lengths):
+                return [self.infer_batch([sample], context)[0] for sample in samples]
+
         pad_token_id = context.tokenizer.pad_token_id if context.tokenizer.pad_token_id is not None else context.tokenizer.eos_token_id
         max_len = max(len(ids) for ids in input_ids_list)
 
@@ -236,6 +244,11 @@ class ScienceQATaskAdapter(BaseInferenceAdapter):
             input_id = tokenizer_image_token(
                 prompt, context.tokenizer, IMAGE_TOKEN_INDEX, return_tensors="pt")
             input_ids_list.append(input_id)
+
+        if len(samples) > 1:
+            lengths = [int(ids.numel()) for ids in input_ids_list]
+            if max(lengths) != min(lengths):
+                return [self.infer_batch([sample], context)[0] for sample in samples]
 
         pad_token_id = context.tokenizer.pad_token_id if context.tokenizer.pad_token_id is not None else context.tokenizer.eos_token_id
         max_len = max(len(ids) for ids in input_ids_list)

@@ -1129,3 +1129,13 @@ if is_bnb_available():
                     )
                     result += output
                 return result
+
+else:
+    # Keep the optional quantized-layer symbols importable for custom tuners.
+    # The concrete implementations are only used when bitsandbytes is available.
+    Linear8bitLt = None
+    Linear4bit = None
+
+
+if is_bnb_available() and not is_bnb_4bit_available():
+    Linear4bit = None

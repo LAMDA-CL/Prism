@@ -39,6 +39,13 @@ If you use this repository, please cite:
   booktitle={ICML},
   year={2026}
 }
+
+@inproceedings{tang2026cram,
+  title={CRAM: Centroid-Routing and Adaptive MoE for Multimodal Continual Instruction Tuning},
+  author={Tang, Jun-Tao and Xie, Zhen-Hao and Shi, Yu-Cheng and Zhou, Da-Wei},
+  booktitle={EMNLP},
+  year={2026}
+}
 ```
 
 ---
@@ -68,6 +75,7 @@ Each method is selected with `--method <id>` (folder under `method/custom/<id>/`
 | EWC | `ewc` | [Overcoming catastrophic forgetting in neural networks](https://arxiv.org/abs/1612.00796) |
 | DisCo | `disco` | [Federated Continual Instruction Tuning](https://arxiv.org/abs/2503.12897) |
 | SAME | `same` | [SAME: Stabilized Mixture-of-Experts for Multimodal Continual Instruction Tuning](https://arxiv.org/abs/2602.01990) |
+| CRAM | `cram` | [CRAM: Centroid-Routing and Adaptive MoE for Multimodal Continual Instruction Tuning](https://arxiv.org/abs/2606.02502) |
 | Zero-shot | `zeroshot` | [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485) |
 
 To add a method, implement `method/custom/<your_method>/integration.py` and register with `@CLMethodFactory.register("your_method")`.

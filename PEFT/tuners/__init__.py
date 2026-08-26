@@ -32,3 +32,4 @@ from .custom.smolora import SMoLoraConfig, SMoLoraModel
 from .custom.clmoe import CLMoEConfig, CLMoEModel
 from .custom.disco import DiscoMOELoraConfig, DiscoMOELoraModel
 from .custom.modal_prompt import ModalPromptConfig, ModalPromptModel
+from .custom.cram_lora import CramBudgetLoraConfig, CramBudgetLoraModel
