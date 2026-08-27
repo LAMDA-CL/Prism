@@ -103,6 +103,21 @@ def _try_import_cl_components():
         return None, None
 
 
+def _maybe_repair_cram_expert_metadata(lora_target) -> None:
+    """Restore CRAM expert_mask / expert_r from A/B weights after adapter load.
+
+    Original CRAM (grac) did this in ``load_from_checkpoint``: PEFT may omit
+    ``expert_mask`` / ``expert_r`` buffers, and the forward path then skips every
+    expert branch (inference looks like zeroshot).
+    """
+    try:
+        from PEFT.tuners.custom.cram_lora import repair_all_cram_expert_mask_and_r_from_weights
+
+        repair_all_cram_expert_mask_and_r_from_weights(lora_target)
+    except Exception as e:
+        _train_log(f"    [CRAM] expert_mask/expert_r restore skipped: {e}")
+
+
 def load_from_checkpoint(model, checkpoint_path, merge_lora=False, for_incremental_training=False):
     """Load weights from a checkpoint directory."""
     import json
@@ -142,6 +157,7 @@ def load_from_checkpoint(model, checkpoint_path, merge_lora=False, for_increment
                 _train_log(f"      checkpoint_path: {checkpoint_path}")
                 lora_target.load_adapter(checkpoint_path, adapter_name='default')
                 _train_log("    LoRA adapter loaded")
+                _maybe_repair_cram_expert_metadata(lora_target)
         else:
             _train_log("  Model has no load_adapter method")
 
@@ -160,6 +176,7 @@ def load_from_checkpoint(model, checkpoint_path, merge_lora=False, for_increment
 
                 lora_target.load_adapter(checkpoint_path, adapter_name='default')
                 _train_log("    load_adapter finished")
+                _maybe_repair_cram_expert_metadata(lora_target)
             else:
                 _train_log("    Checkpoint is not a directory, falling back to manual LoRA load...")
                 _manual_load_lora(lora_target, checkpoint_path)
@@ -228,6 +245,7 @@ def _manual_load_lora(lora_target, checkpoint_path):
         if len(matched) > 0:
             missing, unexpected = lora_target.load_state_dict(remapped_weights, strict=False)
             _train_log("      Manual LoRA load finished")
+            _maybe_repair_cram_expert_metadata(lora_target)
         else:
             _train_log("      Failed to map LoRA weights to model keys")
     else:

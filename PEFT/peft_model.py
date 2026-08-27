@@ -56,6 +56,7 @@ from .tuners import (
     DiscoMOELoraModel,
     ModalPromptConfig,
     ModalPromptModel,
+    CramBudgetLoraModel,
 )
 from .utils import (
     SAFETENSORS_WEIGHTS_NAME,
@@ -92,6 +93,7 @@ PEFT_TYPE_TO_MODEL_MAPPING = {
     PeftType.CLMOE: CLMoEModel,
     PeftType.MOE_LORA_DisCo: DiscoMOELoraModel,
     PeftType.MODAL_PROMPT: ModalPromptModel,
+    PeftType.MOE_LORA_CRAM: CramBudgetLoraModel,
 }
 
 

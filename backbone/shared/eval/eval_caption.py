@@ -17,6 +17,35 @@ def get_args():
     parser.add_argument('--output-dir', type=str)
     return parser.parse_args()
 
+def _coco_file_to_id(annotation_file: str) -> dict:
+    """Map annotation ``file_name`` / stem / trailing id to coco ``image_id``."""
+    with open(annotation_file, "r", encoding="utf-8") as f:
+        gt = json.load(f)
+    mapping = {}
+    for im in gt.get("images", []):
+        iid = int(im["id"])
+        fn = str(im.get("file_name") or "")
+        base = os.path.basename(fn)
+        stem, _ = os.path.splitext(base)
+        mapping[fn] = iid
+        mapping[base] = iid
+        mapping[stem] = iid
+        if "_" in stem:
+            mapping[stem.split("_")[-1]] = iid
+    return mapping
+
+
+def _result_image_id(result: dict, file_to_id: dict, fallback: int) -> int:
+    qid = str(result.get("question_id", "")).strip()
+    if qid:
+        for key in (qid, qid + ".jpg", qid + ".png", qid + ".jpeg"):
+            if key in file_to_id:
+                return int(file_to_id[key])
+        if qid.isdigit() and qid in file_to_id:
+            return int(file_to_id[qid])
+    return int(fallback)
+
+
 def create_coco_type(annotation_file, result_file, output_dir):
     results = [json.loads(line) for line in open(result_file)]
 
@@ -24,12 +53,13 @@ def create_coco_type(annotation_file, result_file, output_dir):
     total = len(results)
     right = 0
     coco_results = []
+    file_to_id = _coco_file_to_id(annotation_file) if annotation_file else {}
     image_id = 1
     for result in results:
         pred = result['text']
-
+        mapped = _result_image_id(result, file_to_id, image_id)
         coco_results.append({
-            "image_id": int(image_id),
+            "image_id": int(mapped),
             "caption": pred
         })
         image_id += 1

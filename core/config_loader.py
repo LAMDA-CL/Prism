@@ -122,7 +122,7 @@ class ModelArguments:
     )
     method: str = field(
         default="hide_llava",
-        metadata={"help": "CL method: hide_llava, same, olora, replay_lora, ft_lora, ewc, ..."},
+        metadata={"help": "CL method: cram, hide_llava, same, olora, replay_lora, ft_lora, ewc, ..."},
     )
     exclude_module_path_segments: Optional[Any] = field(
         default=None,

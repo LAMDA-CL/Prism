@@ -45,6 +45,7 @@ from .tuners import (
     CLMoEConfig,
     DiscoMOELoraConfig,
     ModalPromptConfig,
+    CramBudgetLoraConfig,
 )
 from .utils import PromptLearningConfig, _prepare_prompt_learning_config
 
@@ -66,6 +67,7 @@ MODEL_TYPE_TO_PEFT_MODEL_MAPPING = {
     "CAUSAL_LM_SMOLORA": PeftModelForCausalLMLORAMOE,
     "CAUSAL_LM_MODAL_PROMPT": PeftModelForCausalLMModalPrompt,
     "CAUSAL_LM_DisCo": PeftModelForCausalLMLORAMOEDisCo,
+    "CAUSAL_LM_CRAM": PeftModelForCausalLMLORAMOE,
 }
 
 PEFT_TYPE_TO_CONFIG_MAPPING = {
@@ -84,6 +86,7 @@ PEFT_TYPE_TO_CONFIG_MAPPING = {
     "CLMOE": CLMoEConfig,
     "MOE_LORA_DisCo": DiscoMOELoraConfig,
     "MODAL_PROMPT": ModalPromptConfig,
+    "MOE_LORA_CRAM": CramBudgetLoraConfig,
 }
 
 
