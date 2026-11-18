@@ -34,6 +34,7 @@
 
 ## 🔥 News
 
+- **[2026-11] 🚀 CoPre-MoE is released!** Check out [**CoPre-MoE: Consolidating and Preserving MoE for Multimodal Continual Instruction Tuning**](https://arxiv.org/abs/2611.18417).
 - **[2026-10] 🚀 CART is released!** Check out [**CART: Compatible Routing for Multimodal Continual Instruction Tuning**](https://arxiv.org/abs/2610.22137).
 - **[2026-09] 🚀 ReCAP is released!** Check out [**ReCAP: Retrieval-Guided Capability Reuse for Multimodal Continual Instruction Tuning**](https://arxiv.org/abs/2609.37889).
 - **[2026-09] 🎉 DRAPE is accepted to NeurIPS 2026!** [Paper](https://arxiv.org/abs/2605.10765).
