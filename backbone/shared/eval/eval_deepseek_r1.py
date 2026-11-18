@@ -33,14 +33,16 @@ def prompt_processor(prompt):
 
 def eval_single(annotation_file, result_file, args):
     annotations = json.load(open(annotation_file))
-    annotations = {annotation['question_id']: annotation for annotation in annotations}
+    # annotations = {annotation['question_id']: annotation for annotation in annotations}
+    annotations = {(annotation['question_id'], annotation['text']): annotation for annotation in annotations}
     results = [json.loads(line) for line in open(result_file)]
 
     total = len(results)
     right = 0
     answer_gt_file = []
     for result in results:
-        annotation = annotations[result['question_id']]
+        # annotation = annotations[result['question_id']]
+        annotation = annotations[(result['question_id'], result['prompt'])]
         pred = result['text']
         ground_truth = annotation['answer']
         if pred.upper() == ground_truth.upper():
