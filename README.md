@@ -81,6 +81,7 @@ Each method is selected with `--method <id>` (folder under `method/custom/<id>/`
 | DisCo | `disco` | [Federated Continual Instruction Tuning](https://arxiv.org/abs/2503.12897) |
 | SAME | `same` | [SAME: Stabilized Mixture-of-Experts for Multimodal Continual Instruction Tuning](https://arxiv.org/abs/2602.01990) |
 | CRAM | `cram` | [CRAM: Centroid-Routing and Adaptive MoE for Multimodal Continual Instruction Tuning](https://arxiv.org/abs/2606.02502) |
+| DRAPE | `drape` | [Dynamic Cross-Modal Prompt Generation for Multimodal Continual Instruction Tuning](https://arxiv.org/pdf/2605.10765) |
 | Zero-shot | `zeroshot` | [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485) |
 
 > 💡 **Adding a new method?** Implement `method/custom/<your_method>/integration.py` and register it with `@CLMethodFactory.register("your_method")`.
