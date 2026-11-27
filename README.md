@@ -186,6 +186,13 @@ If PRISM or the implemented methods are useful for your research, please conside
   booktitle={EMNLP},
   year={2026}
 }
+
+@inproceedings{hu2026dynamic,
+  title     = {Dynamic Cross-Modal Prompt Generation for Multimodal Continual Instruction Tuning},
+  author    = {Hu, Tao and Zhou, Da-Wei},
+  booktitle = {NeurIPS},
+  year      = {2026}
+}
 ```
 
 ---
