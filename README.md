@@ -37,7 +37,7 @@
 - **[2026-11] 🚀 CoPre-MoE is released!** Check out [**CoPre-MoE: Consolidating and Preserving MoE for Multimodal Continual Instruction Tuning**](https://arxiv.org/abs/2611.18417).
 - **[2026-10] 🚀 CART is released!** Check out [**CART: Compatible Routing for Multimodal Continual Instruction Tuning**](https://arxiv.org/abs/2610.22137).
 - **[2026-09] 🚀 ReCAP is released!** Check out [**ReCAP: Retrieval-Guided Capability Reuse for Multimodal Continual Instruction Tuning**](https://arxiv.org/abs/2609.37889).
-- **[2026-09] 🎉 DRAPE is accepted to NeurIPS 2026!** [Paper](https://arxiv.org/abs/2605.10765).
+- **[2026-09] 🎉 DRAPE is accepted to NeurIPS 2026!** [Paper](https://arxiv.org/abs/2605.10765). · Implementation is available in PRISM via `--method drape`.
 - **[2026-08] 🎉 CRAM is accepted to EMNLP 2026!** [Paper](https://arxiv.org/abs/2606.02502) · Implementation is available in PRISM via `--method cram`.
 - **[2026-06] 🚀 ProtoAda is released!** Check out [**ProtoAda: Prototype-Guided Adaptive Adapter Expansion and Geometric Consolidation for Multimodal Continual Instruction Tuning**](https://arxiv.org/abs/2606.02576).
 - **[2026-05] 🚀 PRISM is released!** Our plug-in infrastructure currently supports **3 MCIT benchmarks**, **12 continual-learning methods**, and a **zero-shot baseline**. [Paper](https://arxiv.org/abs/2605.26110) · [Documentation](https://lamda-cl.github.io/Prism/)
